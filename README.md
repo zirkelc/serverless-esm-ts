@@ -15,10 +15,23 @@ require() of ES modules is not supported.
 This issue is described in more detail in this [pull request](https://github.com/serverless/serverless/pull/11147) and this [issue](https://github.com/serverless/serverless/issues/11039).
 
 ## Workaround
-Create a `serverless.cjs` file and use [jiti](https://github.com/unjs/jiti/tree/v1) to compile the `serverless.ts` on the fly. 
+Create a `serverless.cjs` file and use [jiti](https://github.com/unjs/jiti) to compile the `serverless.ts` on the fly. 
+
+### Jiti v1
 
 ```js
+// serverless.cjs
 module.exports = require('jiti')(null, { interopDefault: true })(`${__dirname}/serverless.ts`);
+```
+
+### Jiti v2 
+
+```js
+// serverless.cjs
+const { createJiti } = require('jiti');
+const jiti = createJiti(null, { interopDefault: true });
+
+module.exports = jiti.import(`${__dirname}/serverless.ts`, { default: true });
 ```
 
 Then run `sls deploy` with the `--config` flag to specify the `serverless.cjs` file.
