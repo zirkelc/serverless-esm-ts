@@ -39,3 +39,9 @@ Then run `sls deploy` with the `--config` flag to specify the `serverless.cjs` f
 ```sh
 sls deploy --config serverless.cjs
 ```
+
+## Alternative
+Since Serverless v3 has been deprecated, the community has started a [fork](https://github.com/oss-serverless/serverless) to continue maintaining a Serverless Framework CLI v3 alternative.
+I added support for ESM and TypeScript via this [PR](https://github.com/oss-serverless/serverless/pull/30) and it has since been released as v3.49.0. That means running `sls deploy` with a `serverless.ts` or `serverless.mts` config should work out of the box.
+
+ 
